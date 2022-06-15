@@ -12,12 +12,13 @@ class Genres(models.Model):
         verbose_name_plural = "Janrlar "
 class Book(models.Model):
     name = models.CharField(max_length=5000,verbose_name="Kitob nomini",help_text="Kitob nomi kiriting")
-    genre = models.ManyToManyField(Genres,verbose_name="Kitob janr(lar)i",help_text="Kitob janr(lar)i ni kiriting",related_name='genres')
+    genre = models.ManyToManyField(Genres,verbose_name="Kitob janr(lar)i",help_text="Kitob janr(lar)i ni kiriting",related_name='books')
     description = models.TextField(help_text="Kitob haqida qisqacha kiriting",verbose_name="Kitob haqida qisqacha")
     author = models.CharField(max_length=500,verbose_name="kitob muallifi",help_text="Kitob muallifini kiriting")
     uploader = models.ForeignKey(Kitobxon,on_delete=models.PROTECT,verbose_name="Kitob yuklagan shaxs",help_text="Kitob yuklagan shaxsni kiriting")
     image = models.ImageField(upload_to="book-images",null=True,blank=True,verbose_name="Kitob rasmi",help_text="Kitob rasmini kiriting")
     file = models.FileField(upload_to='book-files',verbose_name="Kitob fayli",help_text="Kitob faylini kiriting")
+    audio = models.FileField(upload_to='book-audios',verbose_name="Kitob audio fayli",help_text="Kitob audio fayli",null=True,blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True,help_text="Kitob yuklangan vaqt",verbose_name="Kitob yuklangan vaqt")
     downloaded = models.PositiveIntegerField(default=1,verbose_name="Yuklanganlar soni",help_text='Yuklanganlar soni')
     viewed = models.PositiveIntegerField(default=1,verbose_name="Ko'rilganlar soni",help_text="Ko'rilganlar soni")
@@ -45,7 +46,7 @@ class Book(models.Model):
 
 class Comments(models.Model):
     comment = models.TextField(verbose_name="Izoh",help_text="Izoh yozing")
-    book = models.ForeignKey(Book,on_delete=models.CASCADE)
+    book = models.ForeignKey(Book,on_delete=models.CASCADE,related_name='comments')
     reply = models.ForeignKey('self',null=True,blank=True,related_name='replies',on_delete=models.CASCADE)
     writed = models.DateTimeField(auto_now_add=True,verbose_name="Izoh yozilgan vaqt",help_text="Izoh yozilgan vaqt")
 
