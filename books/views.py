@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework import status
+from rest_framework.pagination import LimitOffsetPagination
 # Create your views here.
+from django.db.models import  Q
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
@@ -14,6 +16,7 @@ class AllGenres(ModelViewSet):
 class AllBooks(ModelViewSet):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
+    pagination_class = LimitOffsetPagination
     @action(methods=['post', 'get'], detail=True)
     def view(self, request, pk=None):
         kitob = get_object_or_404(Book, pk=pk)
@@ -42,3 +45,9 @@ class MoreViewed(APIView):
         kitoblar = Book.objects.all().order_by('-viewed')[:3]
         serializer = BookSerializer(kitoblar,many=True,context={'request': request})
         return Response(serializer.data,status=status.HTTP_200_OK)
+class SearchBook(APIView):
+    def get(self,request,key):
+
+         kitoblar=Book.objects.filter(Q(name__icontains=key) | Q(description__icontains=key) | Q(author__icontains=key))
+         serializer = BookSerializer(kitoblar,many=True,context={'request':request})
+         return Response(serializer.data,status=status.HTTP_302_FOUND)
