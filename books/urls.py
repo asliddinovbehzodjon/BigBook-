@@ -6,6 +6,8 @@ router = DefaultRouter()
 router.register('genres',AllGenres)
 router.register('books',AllBooks)
 router.register('readers',AllReaders)
+router.register('comments',CommentWrite)
 urlpatterns = [
-    path('',include(router.urls))
+    path('',include(router.urls)),
+    path('more',MoreViewed.as_view())
 ]

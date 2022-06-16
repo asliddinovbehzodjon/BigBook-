@@ -15,9 +15,10 @@ class GenresSerializer(serializers.HyperlinkedModelSerializer):
         model = Genres
         fields = ['name','books']
 class BookSerializer(serializers.HyperlinkedModelSerializer):
-    uploader = serializers.StringRelatedField()
+    # uploader = serializers.StringRelatedField()
     comments = CommentSerializer(read_only=True,many=True)
-    genre = serializers.StringRelatedField()
+
+
     class Meta:
         model = Book
         fields = ['url','name','description','genre','author','uploader','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed','comments']
