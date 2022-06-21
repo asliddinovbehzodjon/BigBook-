@@ -22,6 +22,8 @@ urlpatterns = [
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
-    path('api/v1/',include('books.urls'))
+    path('api/v1/',include('books.urls')),
+    path('api/v1/',include('djoser.urls')),
+    path('api/v1/',include('djoser.urls.authtoken')),
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
