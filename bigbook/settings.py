@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-7pw%%14(wz2jarw@jvuy90vn0!ptg68pla_7$9p=ndu=x(q-(f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['http://bigbookuz.pythonanywhere.com/','www.bigbookuz.pythonanywhere.com/','bigbookuz.pythonanywhere.com/']
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
