@@ -19,7 +19,7 @@ class AllBooks(ModelViewSet):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
     pagination_class = LimitOffsetPagination
-    permission_classes = (IsAuthenticated,)
+
     @action(methods=['post', 'get'], detail=True)
     def view(self, request, pk=None):
         kitob = get_object_or_404(Book, pk=pk)
