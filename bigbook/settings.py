@@ -84,6 +84,7 @@ DATABASES = {
 }
 
 REST_FRAMEWORK = {
+    'DATE_INPUT_FORMATS': [("%d-%m-%Y"), ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
       
         'rest_framework.authentication.TokenAuthentication',
