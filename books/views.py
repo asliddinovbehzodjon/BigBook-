@@ -45,7 +45,7 @@ class CommentWrite(ModelViewSet):
     serializer_class = CommentSerializer
 class MoreViewed(APIView):
     def get(self,request):
-        kitoblar = Book.objects.all().order_by('-viewed')[:3]
+        kitoblar = Book.objects.all().order_by('-downloaded')[:3]
         serializer = BookSerializer(kitoblar,many=True,context={'request': request})
         return Response(serializer.data,status=status.HTTP_200_OK)
 class SearchBook(APIView):
