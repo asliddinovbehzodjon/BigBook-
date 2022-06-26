@@ -49,8 +49,7 @@ class MoreViewed(APIView):
         serializer = BookSerializer(kitoblar,many=True,context={'request': request})
         return Response(serializer.data,status=status.HTTP_200_OK)
 class SearchBook(APIView):
-    pagination_class = LimitOffsetPagination
     def get(self,request,key):
          kitoblar=Book.objects.filter(Q(name__icontains=key) | Q(description__icontains=key) | Q(author__icontains=key))
          serializer = BookSerializer(kitoblar,many=True,context={'request':request})
-         return Response(serializer.data,status=status.HTTP_302_FOUND)
+         return Response(serializer.data)
