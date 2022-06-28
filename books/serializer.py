@@ -9,6 +9,7 @@ class BookSerialzerforGenres(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ['id','name','genre','description','author','uploader','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed']
+        depth=1
 class GenresSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genres
