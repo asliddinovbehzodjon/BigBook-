@@ -12,7 +12,7 @@ class Genres(models.Model):
         verbose_name_plural = "Janrlar "
 class Book(models.Model):
     name = models.CharField(max_length=5000,verbose_name="Kitob nomini",help_text="Kitob nomi kiriting")
-    genre = models.ManyToManyField(Genres,verbose_name="Kitob janr(lar)i",help_text="Kitob janr(lar)i ni kiriting",related_name='janr')
+    genre = models.ManyToManyField(Genres,verbose_name="Kitob janr(lar)i",help_text="Kitob janr(lar)i ni kiriting",related_name='books')
     description = models.TextField(help_text="Kitob haqida qisqacha kiriting",verbose_name="Kitob haqida qisqacha")
     author = models.CharField(max_length=500,verbose_name="kitob muallifi",help_text="Kitob muallifini kiriting")
     uploader = models.ForeignKey(Kitobxon,on_delete=models.PROTECT,verbose_name="Kitob yuklagan shaxs",help_text="Kitob yuklagan shaxsni kiriting")
