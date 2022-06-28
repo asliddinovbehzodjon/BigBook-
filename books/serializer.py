@@ -8,7 +8,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class BookSerialzerforGenres(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ['id','name','description','author','uploader','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed']
+        fields = ['id','name','genre','description','author','uploader','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed']
 class GenresSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genres
