@@ -9,12 +9,10 @@ class BookSerialzerforGenres(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ['id','name','description','author','uploader','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed']
-class GenresSerializer(serializers.HyperlinkedModelSerializer):
-    # books = BookSerialzerforGenres(read_only=True,many=True)
-
+class GenresSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genres
-        fields = ['url','id','name','books']
+        fields = ['id','name','books']
         depth=1
 class BookSerializer(serializers.ModelSerializer):
     # uploader = serializers.StringRelatedField()
