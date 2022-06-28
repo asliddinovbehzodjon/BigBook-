@@ -15,7 +15,7 @@ class GenresSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Genres
         fields = ['url','id','name','books']
-        depth=2
+        depth=1
 class BookSerializer(serializers.ModelSerializer):
     # uploader = serializers.StringRelatedField()
     comments = CommentSerializer(read_only=True,many=True)
