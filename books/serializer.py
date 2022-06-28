@@ -19,7 +19,7 @@ class GenresSerializer(serializers.HyperlinkedModelSerializer):
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     # uploader = serializers.StringRelatedField()
     comments = CommentSerializer(read_only=True,many=True)
-
+    id = serializers.IntegerField()
 
     class Meta:
         model = Book
