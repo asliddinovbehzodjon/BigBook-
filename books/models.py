@@ -15,7 +15,6 @@ class Book(models.Model):
     genre = models.ManyToManyField(Genres,verbose_name="Kitob janr(lar)i",help_text="Kitob janr(lar)i ni kiriting",related_name='books')
     description = models.TextField(help_text="Kitob haqida qisqacha kiriting",verbose_name="Kitob haqida qisqacha")
     author = models.CharField(max_length=500,verbose_name="kitob muallifi",help_text="Kitob muallifini kiriting")
-    uploader = models.ForeignKey(Kitobxon,on_delete=models.PROTECT,verbose_name="Kitob yuklagan shaxs",help_text="Kitob yuklagan shaxsni kiriting")
     image = models.ImageField(upload_to="book-images",null=True,blank=True,verbose_name="Kitob rasmi",help_text="Kitob rasmini kiriting")
     file = models.FileField(upload_to='book-files',verbose_name="Kitob fayli",help_text="Kitob faylini kiriting")
     audio = models.FileField(upload_to='book-audios',verbose_name="Kitob audio fayli",help_text="Kitob audio fayli",null=True,blank=True)
