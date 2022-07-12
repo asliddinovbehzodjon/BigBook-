@@ -9,7 +9,7 @@ class BookSerialzerforGenres(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ['id','name','genre','description','author','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed']
-        depth=2
+    
 class GenresSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genres
@@ -18,8 +18,8 @@ class GenresSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(read_only=True,many=True)
-    genres = GenresSerializer(read_only=True,many=True)
+    
     class Meta:
         model = Book
-        fields = ['id','name','description','genres','author','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed','comments']
-        depth=1
+        fields = ['id','name','description','genre','author','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed','comments']
+       
