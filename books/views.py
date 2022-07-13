@@ -15,7 +15,6 @@ from .models import *
 from .serializer import GenresSerializer,BookSerializer,CommentSerializer
 class BasicPagination(PageNumberPagination):
     page_size_query_param = 'limit'
-        
 class AllGenres(ModelViewSet):
     queryset = Genres.objects.all()
     serializer_class = GenresSerializer
@@ -57,11 +56,11 @@ class MoreDownloaded(APIView,PaginationHandlerMixin):
             serializer = self.get_paginated_response(BookSerializer(page,
                 many=True).data)
         else:
-            serializer = BookSerializer(kitoblar, many=True)
-       
+            serializer = BookSerializer(kitoblar, many=True,context={'request': request})
+      
         return Response(serializer.data,status=status.HTTP_200_OK)
 class SearchBook(APIView,PaginationHandlerMixin):
-    pagination_class=BasicPagination
+    pagination_class = BasicPagination
     def get(self,request,key):
         kitoblar=Book.objects.filter(Q(name__icontains=key) | Q(description__icontains=key) | Q(author__icontains=key))
         page = self.paginate_queryset(kitoblar)
@@ -69,5 +68,7 @@ class SearchBook(APIView,PaginationHandlerMixin):
             serializer = self.get_paginated_response(BookSerializer(page,
                 many=True).data)
         else:
-            serializer = BookSerializer(kitoblar, many=True)
-        return Response(serializer.data)
+            serializer = BookSerializer(kitoblar, many=True,context={'request': request})
+      
+        return Response(serializer.data,status=status.HTTP_200_OK)
+     
