@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework import status
-from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.pagination import LimitOffsetPagination,PageNumberPagination
 # Create your views here.
+from .pagination import PaginationHandlerMixin
 from django.db.models import  Q
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -12,6 +13,9 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import *
 from .serializer import GenresSerializer,BookSerializer,CommentSerializer
+class BasicPagination(PageNumberPagination):
+    page_size_query_param = 'limit'
+        
 class AllGenres(ModelViewSet):
     queryset = Genres.objects.all()
     serializer_class = GenresSerializer
@@ -43,13 +47,27 @@ class AllBooks(ModelViewSet):
 class CommentWrite(ModelViewSet):
     queryset = Comments.objects.all()
     serializer_class = CommentSerializer
-class MoreViewed(APIView):
+class MoreDownloaded(APIView,PaginationHandlerMixin):
+    pagination_class = BasicPagination
+    
     def get(self,request):
-        kitoblar = Book.objects.all().order_by('-downloaded')[:3]
-        serializer = BookSerializer(kitoblar,many=True,context={'request': request})
+        kitoblar = Book.objects.all().order_by('-downloaded')
+        page = self.paginate_queryset(kitoblar)
+        if page is not None:
+            serializer = self.get_paginated_response(BookSerializer(page,
+                many=True).data)
+        else:
+            serializer = BookSerializer(kitoblar, many=True)
+       
         return Response(serializer.data,status=status.HTTP_200_OK)
-class SearchBook(APIView):
+class SearchBook(APIView,PaginationHandlerMixin):
+    pagination_class=BasicPagination
     def get(self,request,key):
-         kitoblar=Book.objects.filter(Q(name__icontains=key) | Q(description__icontains=key) | Q(author__icontains=key))
-         serializer = BookSerializer(kitoblar,many=True,context={'request':request})
-         return Response(serializer.data)
+        kitoblar=Book.objects.filter(Q(name__icontains=key) | Q(description__icontains=key) | Q(author__icontains=key))
+        page = self.paginate_queryset(kitoblar)
+        if page is not None:
+            serializer = self.get_paginated_response(BookSerializer(page,
+                many=True).data)
+        else:
+            serializer = BookSerializer(kitoblar, many=True)
+        return Response(serializer.data)

@@ -9,6 +9,6 @@ router.register('readers',AllReaders)
 router.register('comments',CommentWrite)
 urlpatterns = [
     path('',include(router.urls)),
-    path('more',MoreViewed.as_view()),
+    path('more',MoreDownloaded.as_view()),
     path('search/<str:key>/',SearchBook.as_view())
 ]
