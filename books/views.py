@@ -15,13 +15,13 @@ from .models import *
 from .serializer import GenresSerializer,BookSerializer,CommentSerializer
 class BasicPagination(PageNumberPagination):
     page_size_query_param = 'limit'
+    page_size=3
 class AllGenres(ModelViewSet):
     queryset = Genres.objects.all()
     serializer_class = GenresSerializer
 class AllBooks(ModelViewSet):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
-    pagination_class = LimitOffsetPagination
 
     @action(methods=['post', 'get'], detail=True)
     def view(self, request, pk=None):
