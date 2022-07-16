@@ -18,7 +18,7 @@ class GenresSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(read_only=True,many=True)
-    genre = serializers.StringRelatedField()
+    genre = GenresSerializer()
     class Meta:
         model = Book
         fields = ['id','name','description','genre','author','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed','comments']
