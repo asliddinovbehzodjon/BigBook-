@@ -14,8 +14,17 @@ from rest_framework.viewsets import ModelViewSet
 from .models import *
 from .serializer import GenresSerializer,BookSerializer,CommentSerializer
 class BasicPagination(PageNumberPagination):
-    page_size_query_param = 'limit'
-    page_size=3
+   def get_paginated_response(self, data):
+        return Response({
+        
+            'next': self.get_next_link(),
+            'previous': self.get_previous_link(),
+            'current_page_num':self.page.number,
+            'all_pages':self.page.paginator.num_pages,
+            'count': self.page.paginator.count,
+            
+            'results': data
+        })
 class AllGenres(ModelViewSet):
     queryset = Genres.objects.all()
     serializer_class = GenresSerializer
