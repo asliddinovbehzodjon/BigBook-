@@ -82,4 +82,16 @@ class SearchBook(APIView,PaginationHandlerMixin):
             serializer = BookSerializer(kitoblar, many=True,context={'request': request})
       
         return Response(serializer.data,status=status.HTTP_200_OK)
-     
+class MoreGenre(APIView,PaginationHandlerMixin):
+    pagination_class = BasicPagination
+    def get(self,request,genre):
+        kitoblar=Book.objects.filter(genre=genre).order_by('downloaded')[:3]
+        page = self.paginate_queryset(kitoblar)
+        if page is not None:
+            serializer = self.get_paginated_response(BookSerializer(page,
+                many=True).data)
+        else:
+            serializer = BookSerializer(kitoblar, many=True,context={'request': request})
+      
+        return Response(serializer.data,status=status.HTTP_200_OK)
+          
