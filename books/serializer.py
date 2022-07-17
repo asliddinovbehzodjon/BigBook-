@@ -13,7 +13,7 @@ class BookSerialzerforGenres(serializers.ModelSerializer):
 class GenresSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genres
-        fields = ['id','name','books']
+        fields = ['id','name','genres']
         depth =2
 
 class BookSerializer(serializers.ModelSerializer):
