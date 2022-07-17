@@ -12,7 +12,7 @@ class Genres(models.Model):
         verbose_name_plural = "Janrlar "
 class Book(models.Model):
     name = models.CharField(max_length=5000,verbose_name="Kitob nomini",help_text="Kitob nomi kiriting")
-    genre = models.ForeignKey(Genres,verbose_name="Kitob janr(lar)i",help_text="Kitob janr(lar)i ni kiriting",related_name='books',null=True,blank=True,on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genres,verbose_name="Kitob janr(lar)i",help_text="Kitob janr(lar)i ni kiriting",related_name='genres',null=True,blank=True,on_delete=models.CASCADE)
     description = models.TextField(help_text="Kitob haqida qisqacha kiriting",verbose_name="Kitob haqida qisqacha")
     author = models.CharField(max_length=500,verbose_name="kitob muallifi",help_text="Kitob muallifini kiriting")
     image = models.ImageField(upload_to="book-images",null=True,blank=True,verbose_name="Kitob rasmi",help_text="Kitob rasmini kiriting")
