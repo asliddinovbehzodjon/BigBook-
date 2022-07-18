@@ -66,7 +66,7 @@ class MoreDownloaded(APIView,PaginationHandlerMixin):
         page = self.paginate_queryset(kitoblar)
         if page is not None:
             serializer = self.get_paginated_response(BookSerializer(page,
-                many=True).data)
+                many=True,context={'request': request}).data)
         else:
             serializer = BookSerializer(kitoblar, many=True,context={'request': request})
       
@@ -78,7 +78,7 @@ class SearchBook(APIView,PaginationHandlerMixin):
         page = self.paginate_queryset(kitoblar)
         if page is not None:
             serializer = self.get_paginated_response(BookSerializer(page,
-                many=True).data)
+                many=True).data,context={'request': request})
         else:
             serializer = BookSerializer(kitoblar, many=True,context={'request': request})
       
@@ -90,7 +90,7 @@ class MoreGenre(APIView,PaginationHandlerMixin):
         page = self.paginate_queryset(kitoblar)
         if page is not None:
             serializer = self.get_paginated_response(BookSerializer(page,
-                many=True).data)
+                many=True).data,context={'request': request})
         else:
             serializer = BookSerializer(kitoblar, many=True,context={'request': request})
       
