@@ -16,10 +16,10 @@ class GenresSerializer(serializers.ModelSerializer):
         fields = ['id','name','genres']
         depth =2
 
-class BookSerializer(serializers.ModelSerializer):
+class BookSerializer(serializers.HyperLinkedModelSerializer):
     comments = CommentSerializer(read_only=True,many=True)
     
     class Meta:
         model = Book
-        fields = ['id','name','description','genre','author','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed','comments']
+        fields = ['url','id','name','description','genre','author','uploaded_at','image','file','filesize','audio','downloaded','shared','viewed','comments']
        
