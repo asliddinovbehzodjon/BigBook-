@@ -11,5 +11,5 @@ urlpatterns = [
     path('',include(router.urls)),
     path('more',MoreDownloaded.as_view()),
     path('search/<str:key>/',SearchBook.as_view()),
-    path('moregenre/<int:genre>/',MoreGenre.as_view())
+    path('moregenre/<int:genre>/<int:id>/',MoreGenre.as_view())
 ]
