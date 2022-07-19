@@ -1,4 +1,3 @@
-from operator import ge
 from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework import status
@@ -66,9 +65,9 @@ class MoreDownloaded(APIView,PaginationHandlerMixin):
         page = self.paginate_queryset(kitoblar)
         if page is not None:
             serializer = self.get_paginated_response(BookSerializer(page,
-                many=True,context={'request': request}).data)
+                many=True).data)
         else:
-            serializer = BookSerializer(kitoblar, many=True,context={'request': request})
+            serializer = BookSerializer(kitoblar, many=True)
       
         return Response(serializer.data,status=status.HTTP_200_OK)
 class SearchBook(APIView,PaginationHandlerMixin):
@@ -78,9 +77,9 @@ class SearchBook(APIView,PaginationHandlerMixin):
         page = self.paginate_queryset(kitoblar)
         if page is not None:
             serializer = self.get_paginated_response(BookSerializer(page,
-                many=True,context={'request': request}).data)
+                many=True).data)
         else:
-            serializer = BookSerializer(kitoblar, many=True,context={'request': request})
+            serializer = BookSerializer(kitoblar, many=True)
       
         return Response(serializer.data,status=status.HTTP_200_OK)
 class MoreGenre(APIView,PaginationHandlerMixin):
@@ -90,9 +89,9 @@ class MoreGenre(APIView,PaginationHandlerMixin):
         page = self.paginate_queryset(kitoblar)
         if page is not None:
             serializer = self.get_paginated_response(BookSerializer(page,
-                many=True,context={'request': request}).data)
+                many=True).data)
         else:
-            serializer = BookSerializer(kitoblar, many=True,context={'request': request})
+            serializer = BookSerializer(kitoblar, many=True)
       
         return Response(serializer.data,status=status.HTTP_200_OK)
           
