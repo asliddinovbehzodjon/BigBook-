@@ -16,7 +16,7 @@ class GenresSerializer(serializers.ModelSerializer):
         fields = ['id','name','genres']
         depth =2
 
-class BookSerializer(serializers.HyperlinkedModelSerializer):
+class BookSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(read_only=True,many=True)
     
     class Meta:
