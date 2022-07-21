@@ -16,7 +16,7 @@ class BotUsersAdmin(admin.ModelAdmin):
     search_help_text = "User qidirish uchun kalit so'z kiriting"
     list_per_page = 10
     list_max_show_all = 15
-    list_select_related = ['name','telegram_id']
+   
     list_filter = ['added']
     list_display_links = ['telegram_id']
     list_editable = ['name','username']
