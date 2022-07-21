@@ -15,7 +15,7 @@ class Kitobxon(models.Model):
         verbose_name_plural = "Kitobxonlar "
 class BotUsers(models.Model):
     name = models.CharField(max_length=1000,null=True,blank=True,help_text="User ismi",verbose_name="User ismi")
-    telegram_id = models.CharField(max_length=400,verbose_name="Telegram ID",help_text="User Telegram Id si")
+    telegram_id = models.IntegerField(verbose_name="Telegram ID",help_text="User Telegram Id si")
     added = models.DateTimeField(auto_now_add=True)
     username = models.CharField(max_length=1000,null=True,blank=True,help_text="UUser username i",verbose_name="User username i")
     class Meta:
