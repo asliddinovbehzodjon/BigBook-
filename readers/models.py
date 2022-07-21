@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 
 # Create your models here.
@@ -12,3 +13,12 @@ class Kitobxon(models.Model):
         db_table = "Kitobxonlar"
         verbose_name = "Kitobxon "
         verbose_name_plural = "Kitobxonlar "
+class BotUsers(models.Model):
+    name = models.CharField(max_length=1000,null=True,blank=True,help_text="User ismi",verbose_name="User ismi")
+    telegram_id = models.CharField(max_length=400,verbose_name="Telegram ID",help_text="User Telegram Id si")
+    added = models.DateTimeField(auto_now_add=True)
+    username = models.CharField(max_length=1000,null=True,blank=True,help_text="UUser username i",verbose_name="User username i")
+    class Meta:
+        verbose_name = "Bot User"
+        verbose_name_plural = "Bot Users"
+        db_table = "Bot Users"

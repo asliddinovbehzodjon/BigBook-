@@ -20,8 +20,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8080',
     'https://bigbookuz.netlify.app',
     'http://127.0.0.1:8000',
-    'http://bigbook.behzodasliddinov.uz/',
-    'https://bigbook.behzodasliddinov.uz/'
+    'http://bigbook.behzodasliddinov.uz',
+    'https://bigbook.behzodasliddinov.uz'
 ]
 # Application definition
 
