@@ -16,7 +16,7 @@ class BotUsersAll(ModelViewSet):
     serializer_class  = BotUserSerializer
     pagination_class = None
 class TimeInfo(APIView):
-    def get(self):
+    def get(self,request):
         today = datetime.today()
         oneweek = today - timedelta(days=7)
         oneday = today - timedelta(days=1)
