@@ -11,4 +11,4 @@ class AllReaders(ModelViewSet):
 class BotUsersAll(ModelViewSet):
     queryset = BotUsers.objects.all()
     serializer_class  = BotUserSerializer
-    
+    pagination_class = None
