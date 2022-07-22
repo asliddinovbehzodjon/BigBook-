@@ -27,5 +27,9 @@ class TimeInfo(APIView):
         allfilter = BotUsers.objects.all().count()
         return Response(data= {'today':onedayfilter,'lastweek':oneweekfilter,'lastmonth':onemonthfilter,'all':allfilter})
     
-        
+class AllBotUsers(ModelViewSet):
+    queryset = BotUsers.objects.all().only('telegram_id')
+    serializer_class = BotUserSerializer
+    pagination_class = None
+            
         
