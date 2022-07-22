@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from datetime import datetime,timedelta
+from datetime import datetime,timedelta,date
 from rest_framework.views import APIView
 # Create your views here.
 from rest_framework import status
@@ -16,15 +16,15 @@ class BotUsersAll(ModelViewSet):
     pagination_class = None
 class TimeInfo(APIView):
     def get(self,request):
-        today = datetime.today()
+        today = date.today()
+        nextday = today+ timedelta(days=1)
         oneweek = today - timedelta(days=7)
         oneday = today + timedelta(days=1)
         onemonth = today - timedelta(days=30)
-        onedayfilter = BotUsers.objects.filter(added__gte=today ,added__lte=oneday).count()
-        oneweekfilter = BotUsers.objects.filter(added__gte=oneweek,added__lte=today).count()
-        onemonthfilter = BotUsers.objects.filter(added__gte=onemonth,added__lte=today).count()
+        onedayfilter = BotUsers.objects.filter(added__range=[today,oneday]).count()
+        oneweekfilter = BotUsers.objects.filter(added__range=[oneweek,nextday]).count()
+        onemonthfilter = BotUsers.objects.filter(added__range=[onemonth,nextday]).count()
         allfilter = BotUsers.objects.all().count()
-        # serializer = BotUserSerializer(oneweekfilter,many=True)
         return Response(data= {'today':onedayfilter,'lastweek':oneweekfilter,'lastmonth':onemonthfilter,'all':allfilter})
     
         
