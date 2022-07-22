@@ -18,9 +18,9 @@ class TimeInfo(APIView):
     def get(self,request):
         today = datetime.today()
         oneweek = today - timedelta(days=7)
-        oneday = today - timedelta(days=1)
+        oneday = today + timedelta(days=1)
         onemonth = today - timedelta(days=30)
-        onedayfilter = BotUsers.objects.filter(added__range=[oneday,today]).count()
+        onedayfilter = BotUsers.objects.filter(added__range=[today,oneday]).count()
         oneweekfilter = BotUsers.objects.filter(added__range=[oneweek,today]).count()
         onemonthfilter = BotUsers.objects.filter(added__range=[onemonth,today]).count()
         allfilter = BotUsers.objects.all().count()
