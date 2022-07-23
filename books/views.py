@@ -25,6 +25,19 @@ class BasicPagination(PageNumberPagination):
             
             'results': data
         })
+class CustomeBasicPagination(PageNumberPagination):
+   page_size = 10 
+   def get_paginated_response(self, data):
+        return Response({
+        
+            'next': self.get_next_link(),
+            'previous': self.get_previous_link(),
+            'current_page_num':self.page.number,
+            'all_pages':self.page.paginator.num_pages,
+            'count': self.page.paginator.count,
+            
+            'results': data
+        })
 class AllGenres(ModelViewSet):
     queryset = Genres.objects.all()
     serializer_class = GenresSerializer
@@ -72,6 +85,18 @@ class MoreDownloaded(APIView,PaginationHandlerMixin):
         return Response(serializer.data,status=status.HTTP_200_OK)
 class SearchBook(APIView,PaginationHandlerMixin):
     pagination_class = BasicPagination
+    def get(self,request,key):
+        kitoblar=Book.objects.filter(Q(name__icontains=key) | Q(description__icontains=key) | Q(author__icontains=key))
+        page = self.paginate_queryset(kitoblar)
+        if page is not None:
+            serializer = self.get_paginated_response(BookSerializer(page,
+                many=True).data)
+        else:
+            serializer = BookSerializer(kitoblar, many=True)
+      
+        return Response(serializer.data,status=status.HTTP_200_OK)
+class SearchBookBot(APIView,PaginationHandlerMixin):
+    pagination_class = CustomeBasicPagination
     def get(self,request,key):
         kitoblar=Book.objects.filter(Q(name__icontains=key) | Q(description__icontains=key) | Q(author__icontains=key))
         page = self.paginate_queryset(kitoblar)
