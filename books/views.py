@@ -14,7 +14,8 @@ from rest_framework.viewsets import ModelViewSet
 from .models import *
 from .serializer import GenresSerializer,BookSerializer,CommentSerializer
 class BasicPagination(PageNumberPagination):
-   def get_paginated_response(self, data):
+    page_size = 3
+    def get_paginated_response(self, data):
         return Response({
         
             'next': self.get_next_link(),
@@ -26,8 +27,8 @@ class BasicPagination(PageNumberPagination):
             'results': data
         })
 class CustomeBasicPagination(PageNumberPagination):
-   page_size = 10 
-   def get_paginated_response(self, data):
+    page_size = 10 
+    def get_paginated_response(self, data):
         return Response({
         
             'next': self.get_next_link(),
