@@ -27,7 +27,7 @@ class BasicPagination(PageNumberPagination):
             'results': data
         })
 class CustomeBasicPagination(PageNumberPagination):
-    page_size = 3
+    page_size = 5
     def get_paginated_response(self, data):
         return Response({
         
