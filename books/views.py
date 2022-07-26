@@ -34,7 +34,7 @@ class CustomeBasicPagination(PageNumberPagination):
             'next': self.get_next_link(),
             'previous': self.get_previous_link(),
             'current_page_num':self.page.number,
-            'current_page_num_size':self.page.paginator.count,
+            'current_page_num_size':self.page_size,
             'all_pages':self.page.paginator.num_pages,
             'count': self.page.paginator.count,
             
