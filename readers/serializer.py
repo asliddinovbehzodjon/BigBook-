@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Kitobxon,BotUsers
+from .models import Kitobxon,BotUsers,TgChannel
 class KitobxonSerializer(serializers.ModelSerializer):
         class Meta:
             model = Kitobxon
@@ -9,3 +9,8 @@ class BotUserSerializer(serializers.ModelSerializer):
         model = BotUsers
         read_onyl_fields = ['added']
         fields = ['id','name','telegram_id','username','added']
+class TgChannelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TgChannel
+        fields =  ['channel']
+        

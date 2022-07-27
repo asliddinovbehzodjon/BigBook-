@@ -4,8 +4,8 @@ from datetime import datetime,timedelta,date
 from rest_framework.views import APIView
 # Create your views here.
 from rest_framework import status
-from .models import Kitobxon,BotUsers
-from .serializer import KitobxonSerializer,BotUserSerializer
+from .models import Kitobxon,BotUsers, TgChannel
+from .serializer import KitobxonSerializer,BotUserSerializer, TgChannelSerializer
 from rest_framework.viewsets import ModelViewSet
 class AllReaders(ModelViewSet):
     queryset = Kitobxon.objects.all()
@@ -33,3 +33,7 @@ class AllBotUsers(ModelViewSet):
     pagination_class = None
             
         
+class TgChannelViewSet(ModelViewSet):
+    queryset = TgChannel.objects.all()
+    serializer_class = TgChannelSerializer
+    pagination_class = None

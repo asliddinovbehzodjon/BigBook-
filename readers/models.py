@@ -22,3 +22,9 @@ class BotUsers(models.Model):
         verbose_name = "Bot User"
         verbose_name_plural = "Bot Users"
         db_table = "Bot Users"
+class TgChannel(models.Model):
+    channel =  models.CharField(max_length=6000,verbose_name="Kanal ID si yoki USERNAME")
+    class Meta:
+        verbose_name = "Telegram Channel "
+        verbose_name_plural = "Telegram Channels "
+        db_table = "Telegram Channel"
