@@ -43,7 +43,7 @@ class CustomeBasicPagination(PageNumberPagination):
 class AllGenres(ModelViewSet):
     queryset = Genres.objects.all()
     serializer_class = GenresSerializer
-    pagination_class = BasicPagination
+    pagination_class = None
 class AllBooks(ModelViewSet):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
