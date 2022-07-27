@@ -17,6 +17,9 @@ schema_view = get_schema_view(
    public=True,
 
 )
+admin.site.site_header = "BigBookuz"
+admin.site.site_title = "BigBook"
+admin.site.site_url  = "BigBook"
 urlpatterns = [
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
