@@ -47,7 +47,7 @@ class AllGenres(ModelViewSet):
 class AllBooks(ModelViewSet):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
-    pagination_class = BasicPagination
+    pagination_class = None
 
     @action(methods=['post', 'get'], detail=True)
     def view(self, request, pk=None):
